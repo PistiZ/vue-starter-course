@@ -1,44 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Learning Vue Like a Boss!</title>
+    <head>
+        <meta charset="UTF-8">
+        <title>Learning Vue Like a Boss!</title>
 
-  <!-- css -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
+        <!-- css -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.3/css/bulma.css">
 
-  <!-- js -->
-  <script src="https://unpkg.com/vue"></script>
-</head>
-<body>
-  <!-- our template -->
-  <section id="app" class="section container">
+        <!-- js -->
+        <script src="https://unpkg.com/vue"></script>
+    </head>
 
-    <!-- Inline Classes ========================================= -->
-    <h2 class="title">Inline Classes</h2>
+    <body>
+        <!-- our template -->
+        <section id="app" class="section container">
 
-    <!-- Object Classes ========================================= -->
-    <h2 class="title">Object Classes</h2>
+            <!-- Inline Classes ========================================= -->
+            <h2 class="title">Inline Classes</h2>
 
-    <!-- Array Classes ========================================= -->
-    <h2 class="title">Array Classes</h2>
+            <div class="notification" :class="{ 'is-success': isSuccessful, 'is-size-1': isLarge }">
+                I am a notification!
+            </div>
 
-    <!-- ================================================== -->
-    <hr>
+            <a class="button is-info" v-on:click="celebrate">We did it!</a>
 
-    <!-- Inline Styles ========================================= -->
-    <h2 class="title">Inline Styles</h2>
+            <!-- Object Classes ========================================= -->
+            <h2 class="title">Object Classes</h2>
 
-    <!-- Object Styles ========================================= -->
-    <h2 class="title">Object Styles</h2>
+            <div class="notification" :class="notificationStyles">
+                I am a notification!
+            </div>
 
-  </section>
+            <!-- Array Classes ========================================= -->
+            <h2 class="title">Array Classes</h2>
 
-  <!-- our javascript -->
-  <script>
-    const app = new Vue({
-      el: '#app'
-    });
-  </script>
-</body>
+            <div class="notification" :class="[classOne, classTwo]">
+                I am a notification!
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" value="is-info" v-model="color">Info
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" value="is-warning" v-model="color">Warning
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" value="is-danger" v-model="color">Danger
+                    </label>
+                </div>
+            </div>
+
+            <div class="field">
+                <div class="control">
+                    <label class="radio">
+                        <input type="radio" value="is-small" v-model="size">Small
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" value="is-medium" v-model="size">Medium
+                    </label>
+
+                    <label class="radio">
+                        <input type="radio" value="is-large" v-model="size">Large
+                    </label>
+                </div>
+            </div>
+
+            <button type="button" class="button" :class="[color, size]">
+                My Button
+            </button>
+
+            <!-- ================================================== -->
+            <hr>
+
+            <!-- Inline Styles ========================================= -->
+            <h2 class="title">Inline Styles</h2>
+
+            <div class="notification" :style="{ color: myColor, fontSize: mySize, backgroundColor: myBgColor }">
+                I am a notification!
+            </div>
+
+            <!-- Object Styles ========================================= -->
+            <h2 class="title">Object Styles</h2>
+
+            <div class="message">
+                <div class="message-body" :style="myMessageStyles">
+                    I am a notification!
+                </div>
+            </div>
+        </section>
+
+        <!-- our javascript -->
+        <script>
+            const app = new Vue({
+                el: '#app',
+
+                data: {
+                    isSuccessful: false,
+                    isLarge: false,
+
+                    notificationStyles: {
+                        'is-success': true,
+                        'is-size-1': true
+                    },
+
+                    color: '',
+                    size: '',
+
+                    classOne: 'is-danger',
+                    classTwo: 'is-large',
+
+                    myColor: 'red',
+                    mySize: '20px',
+                    myBgColor: '#AAA',
+
+                    myMessageStyles: {
+                        color: '#EEE',
+                        fontSize: '20px',
+                        backgroundColor: '#555'
+                    }
+                },
+
+                methods: {
+                    celebrate: function () {
+                        this.isSuccessful = true;
+                        this.isLarge = true;
+                    }
+                }
+            });
+        </script>
+    </body>
 </html>
